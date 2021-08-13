@@ -49,10 +49,14 @@ int main(int argc, char **argv) {
 			for(j=2;j < n_destino;j++) {
 				if(strcmp(nameList_origem[i]->d_name, nameList_destino[j]->d_name) == 0) {
 					foiEncontrado = 1;
-					char path_destino[200] = "minha_pasta_backup/";
-					strcat(path_destino, nameList_destino[j]->d_name);
-					char path_origem[200] = "minha_pasta/";
+					char path_origem[200];
+					strcpy(path_origem, argv[1]);
+					strcat(path_origem, "/");
 					strcat(path_origem, nameList_origem[i]->d_name);
+					char path_destino[200];
+					strcpy(path_destino, argv[2]);
+					strcat(path_destino, "/");
+					strcat(path_destino, nameList_destino[j]->d_name);					
 					stat(path_origem, &buffer_origem);
 					stat(path_destino, &buffer_destino);
 					if(buffer_origem.st_mtime > buffer_destino.st_mtime) {
